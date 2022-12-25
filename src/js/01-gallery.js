@@ -1,10 +1,7 @@
-// Add imports above this line
 import { galleryItems } from './gallery-items';
 import SimpleLightbox from 'simplelightbox';
+// import templateFunction from '../templates/item-markup.hbs';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-// Change code below this line
-
-console.log(galleryItems);
 
 const refs = {
   gallery: document.querySelector('.gallery'),
@@ -27,11 +24,6 @@ function images(qwe) {
 const card = images(galleryItems);
 refs.gallery.insertAdjacentHTML('beforeend', card);
 
-const img = document.querySelectorAll('.gallery__image');
-img.forEach(e => {
-  e.style = 'display:block';
-});
-// ===Запрещаем действия по умолчанию(например: скачивание)
 function blockStandartAction(event) {
   event.preventDefault();
 }
@@ -46,10 +38,11 @@ function selectImage(event) {
     return;
   }
   // ===Открываем с помощью библиотеки
-  const lightbox = new SimpleLightbox('.gallery a', {
-    /* options */
+   new SimpleLightbox('.gallery a', {
+    captions: true,
+    captionsData: 'alt',
+    captionDelay: 250,
   });
-  lightbox.show();
   // ===Закрываем
   refs.gallery.addEventListener('keydown', event => {
     if (event.code === 'Escape') {
